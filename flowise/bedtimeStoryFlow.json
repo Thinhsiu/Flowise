@@ -1,0 +1,39 @@
+{
+  "nodes": [
+    {
+      "id": "prompt_input",
+      "type": "Input",
+      "label": "Story Request",
+      "params": {
+        "fields": [
+          { "name": "childName", "label": "Child Name", "required": true, "type": "text" },
+          { "name": "theme", "label": "Story Theme", "required": true, "type": "text" }
+        ]
+      }
+    },
+    {
+      "id": "prompt_generator",
+      "type": "Prompt",
+      "label": "Generate Story",
+      "params": {
+        "prompt": "Write a short, calming bedtime story for a kid named [childName].\nTheme: [theme]. Keep it wholesome, imaginative, and child-safe.\nInclude 3 scenes. Describe visuals softly."}
+      },
+    {
+      "id": "gpt_call",
+      "type": "GPT4",
+      "label": "GPT Response",
+      "params": {
+        "model": "gpt-4",
+        "messages": [
+          { "role": "user", "content": "<<PROMPT>>" }
+        ],
+        "temperature": 0.7,
+        "max_tokens": 500
+      }
+    }
+  ],
+  "links": [
+    { "source": "prompt_input", "target": "prompt_generator" },
+    { "source": "prompt_generator", "target": "gpt_call" }
+  ]
+}
